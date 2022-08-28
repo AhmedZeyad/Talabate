@@ -161,7 +161,7 @@ class _PruductPageState extends State<PruductPage> {
                     margin: EdgeInsets.symmetric(vertical: 20),
                     padding: EdgeInsets.all(9),
                     decoration: BoxDecoration(
-                        color: mainElementColor(),
+                                            color: Colors.black12,
                         borderRadius: BorderRadius.circular(30)),
                     child: Stack(
                       children: [
@@ -205,10 +205,10 @@ class _PruductPageState extends State<PruductPage> {
                   },
                   child: Container(
                     height: 60,
-                    margin: EdgeInsets.symmetric(vertical: 50),
+                    margin: EdgeInsets.symmetric(vertical: 30),
                     padding: EdgeInsets.all(20),
                     decoration: BoxDecoration(
-                        color: mainElementColor(),
+                        color: Colors.black12,
                         borderRadius: BorderRadius.circular(23)),
                     child: Center(
                         child: TextField(

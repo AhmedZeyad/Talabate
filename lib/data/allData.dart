@@ -122,10 +122,6 @@ List<String> TopicsName = [
   "جديد",
 ];
 List postImage = [
-  "images/type1food.jpeg",
-  "images/type2.jpeg",
-  "images/bloshe.jpeg",
-  "images/type5.jpeg",
   "images/type4.jpeg",
   "images/type3.webp",
   "images/type6.png",
