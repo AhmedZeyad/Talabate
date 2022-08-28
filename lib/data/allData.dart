@@ -3,6 +3,7 @@ import 'package:toters/screns/TapPage/AcoundPage/acountPage.dart';
 import 'package:toters/screns/TapPage/homePage/home.dart';
 import 'package:toters/screns/TapPage/ordersPage/orderpage.dart';
 import 'package:toters/screns/TapPage/walletPage/wallatpage.dart';
+
 int indexPage = 0;
 List sicren = [
   homepage(),
@@ -37,13 +38,13 @@ List typeImage = [
   "images/type17.jpeg",
 ];
 List typeName = [
-  "المطاطعم",
+  "المطاعم",
   "فطور صباحي",
   "بلوشي",
-  "حلويات ومعحنات",
+  "حلويات ومعجنات",
   "الفواكه والخضروات",
-  "لحوم",
-  "ماكت",
+  "الحوم",
+  "ماركت",
   "بحرية",
   "التجهيزات الغذائية",
   "دايت فود",
@@ -141,14 +142,23 @@ List postImage = [
   "images/type17.jpeg",
 ];
 //restaurant  Name
-List<String> Costorder = [
+List<String> CostOrder = [
   "Minimum order: 5,000 IQD",
-  "Minimum order: 2,000 IQD",
+  "Minimum order: 5,000 IQD",
   "Minimum order: 14,000 IQD",
   "Minimum order: 20,000 IQD",
   "Minimum order: 6,000 IQD",
   "Minimum order: 10,000 IQD",
   "Minimum order: 18,000 IQD",
+];
+List<int> IntfoodCost = [
+  5000,
+  5000,
+  14000,
+  20000,
+  6000,
+  10000,
+  18000,
 ];
 List<String> ResN = [
   "رويل كالكسي",
@@ -160,16 +170,16 @@ List<String> ResN = [
 ];
 //location restaurant
 List<String> locR = [
-  "المنصور",
-  "المنصور",
-  "العامرية",
-  "حي الحسين",
-  "حي الحسين",
+  "Mansour",
+  "Mansour",
+  "amrea",
+  "hae al Hussain",
+  "hae al Hussain",
 ];
 //delivery cost
 List<String> DlvC = [
-  "Delivery order: 2,000 IQD",
-  "Delivery order: 2,000 IQD",
+  "Delivery order: 5,000 IQD",
+  "Delivery order: 4,000 IQD",
   "Delivery order: Free  IQd",
   "Delivery order: Free  IQD",
   "Delivery order: 1,000 IQD",
@@ -177,7 +187,7 @@ List<String> DlvC = [
 
 int Rank = 0;
 
-Row RestorentInfo(indexPost,Rank) {
+Row RestorentInfo(indexPost, Rank) {
   return Row(
     mainAxisAlignment: MainAxisAlignment.spaceBetween,
     children: [
@@ -185,7 +195,7 @@ Row RestorentInfo(indexPost,Rank) {
         locR[indexPost],
         style: TextStyle(fontSize: 11, color: mainElementColor()),
       ),
-      ranke (Rank),
+      ranke(Rank),
       Text(
         DlvC[indexPost],
         style: TextStyle(fontSize: 11, color: mainElementColor()),
@@ -195,7 +205,7 @@ Row RestorentInfo(indexPost,Rank) {
 }
 
 
-Row ranke (Rank) {
+Row ranke(Rank) {
   if (Rank == 5) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -234,7 +244,7 @@ Row ranke (Rank) {
       ],
     );
   }
-  if (Rank == 2||Rank==1) {
+  if (Rank == 2 || Rank == 1) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
 
@@ -260,3 +270,11 @@ Row ranke (Rank) {
       ],
     );
 }
+
+List food = [
+  "burger",
+  "finger fiery",
+  "dolma",
+  "dolma",
+  "bagla",
+];

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:toters/data/allData.dart';
+import 'package:toters/screns/TapPage/homePage/pruduct%20page.dart';
 
 class homepage extends StatefulWidget {
   const homepage({Key? key}) : super(key: key);
@@ -45,7 +46,6 @@ class _homepageState extends State<homepage> {
           ],
         ),
       ),
-
       backgroundColor: Colors.white,
       body: SafeArea(
         child: Column(
@@ -127,28 +127,26 @@ class _homepageState extends State<homepage> {
                       children: [
                         Expanded(
                             child: ListView(
-                          scrollDirection: Axis.horizontal,
-                          children: [
-                            Topics(0),
-                            Topics(1),
-                            Topics(2),
-                            Topics(3),
-                            Topics(4),
-                            Topics(5),
-                            Topics(6),
-                          ],
-                        ))
+                              scrollDirection: Axis.horizontal,
+                              children: [
+                                Topics(0),
+                                Topics(1),
+                                Topics(2),
+                                Topics(3),
+                                Topics(4),
+                                Topics(5),
+                                Topics(6),
+                              ],
+                            ))
                       ],
                     ),
                   ),
-                  Container(
-
-                    child: Column(
-                      children: [
-                        post(1,1, 3, true, true),
-                                     post(4,3, 5, true, false),
-                      ],
-                    ),
+                  Column(
+                    children: [
+                      post(1, 1, 3, true, true),
+                      post(4, 3, 5, true, false),
+                      post(5, 4, 2, true, false),
+                    ],
                   ),
                 ],
               ),
@@ -159,9 +157,7 @@ class _homepageState extends State<homepage> {
     );
   }
 
-  Column types(
-    int index,
-  ) {
+  Column types(int index,) {
     return Column(
       children: [
         Container(
@@ -214,7 +210,10 @@ class _homepageState extends State<homepage> {
             Container(
               margin: EdgeInsets.all(9),
               height: 130,
-              width: MediaQuery.of(context).size.width - 100,
+              width: MediaQuery
+                  .of(context)
+                  .size
+                  .width - 100,
               decoration: BoxDecoration(
                   image: DecorationImage(
                       fit: BoxFit.cover, image: AssetImage(typeImage[0])),
@@ -232,7 +231,6 @@ class _homepageState extends State<homepage> {
                 style: TextStyle(color: mainColor(), fontSize: 25),
               ),
             ),
-
           ],
         ),
       ],
@@ -261,7 +259,7 @@ class _homepageState extends State<homepage> {
       ),
     );
   }
-}
+
 
 // ###################
 TextButton event() {
@@ -285,56 +283,77 @@ TextButton event() {
         ],
       ));
 }
-
-Container post(int indexResN, int indexPost,int Rank, bool dlevry, bool bromocod) {
+Container post(int indexResN, int indexPost, int Rank, bool dlevry,
+    bool bromocod) {
   return Container(
-    height: 190,
+      height: 190,
+      margin: EdgeInsets.all(20),
+      child: GestureDetector(
+        onTap: () {
+          print("go");
 
-    margin: EdgeInsets.all(20),
-    child: Column(
-      children: [
-        Expanded(
-          child: Container(
-            padding: EdgeInsets.all(15),
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                image: DecorationImage(
-                    fit: BoxFit.cover,
-                    image: AssetImage(postImage[indexPost]))),
-            child: Stack(
-              alignment: Alignment.topRight,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [dlv(dlevry), bromoCode(bromocod)],
-                )
-              ],
+          Navigator.push(
+              context, MaterialPageRoute(builder: (_)
+          =>
+              PruductPage(
+                  foodintConst:IntfoodCost[indexPost],
+                foodn: food[indexPost],
+                postImage:postImage[indexPost],
+                bromoCode: bromoCode(bromocod),
+                ResN: ResN[indexResN],
+                  CostOrder:CostOrder[indexPost],
+                  DlvC:DlvC[indexPost],
+                locR:locR[indexPost],
+                  ranke : ranke (Rank)
+
+
+              ),
+          ));
+        },
+        // onTap: (){Navigator.of(context).push(MaterialPageRoute(builder:(context) => PruductPage()));},
+
+        child: Column(
+          children: [
+            Expanded(
+              child: Container(
+                padding: EdgeInsets.all(15),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    image: DecorationImage(
+                        fit: BoxFit.cover,
+                        image: AssetImage(postImage[indexPost]))),
+                child: Stack(
+                  alignment: Alignment.topRight,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        dlv(dlevry), bromoCode(bromocod)],
+                    )
+                  ],
+                ),
+              ),
             ),
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.all(10),
-          child:
-
-            Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                ResN[indexResN],
-                style: TextStyle(fontSize: 20, color: mainColor()),
+            Padding(
+              padding: const EdgeInsets.all(10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    ResN[indexResN],
+                    style: TextStyle(fontSize: 20, color: mainColor()),
+                  ),
+                  Text(
+                    CostOrder[indexPost],
+                    style: TextStyle(fontSize: 11, color: mainElementColor()),
+                  ),
+                ],
               ),
-              Text(
-                Costorder[indexPost],
-                style: TextStyle(fontSize: 11, color: mainElementColor()),
-              ),
-            ],
-          )
-          ,
+            ),
+            RestorentInfo(indexPost, Rank),
+          ],
         ),
-        RestorentInfo(indexPost,Rank),
-
-      ],
-    ),
-  );
+      ));
+}
 }
