@@ -12,16 +12,19 @@ class _chosePageState extends State<chosePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
       bottomNavigationBar:
       BottomNavigationBar(onTap: (int indexss) {
         setState(() {
           indexPage = indexss;
+
         });
       },
 selectedLabelStyle: TextStyle(color: mainColor()),
         unselectedItemColor: mainElementColor(),
         selectedItemColor: mainColor(),
         backgroundColor: Colors.white,
+        currentIndex: indexPage,
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon:Icon(Icons.home_filled,size: 40,),

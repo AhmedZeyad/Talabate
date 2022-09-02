@@ -65,6 +65,9 @@ Color mainColor() {
 Color mainElementColor() {
   return Colors.black54;
 }
+Color shadoColor() {
+  return Colors.black12;
+}
 
 //dlv deleviry icon
 Container dlv(dlevry) {
@@ -168,6 +171,8 @@ List<String> ResN = [
 List<String> locR = [
   "Mansour",
   "Mansour",
+  "Mansour",
+  "Mansour",
   "amrea",
   "hae al Hussain",
   "hae al Hussain",
@@ -175,6 +180,8 @@ List<String> locR = [
 //delivery cost
 List<String> DlvC = [
   "Delivery order: 5,000 IQD",
+  "Delivery order: 5,000 IQD",
+  "Delivery order: 4,000 IQD",
   "Delivery order: 4,000 IQD",
   "Delivery order: Free  IQd",
   "Delivery order: Free  IQD",
@@ -202,7 +209,7 @@ Row RestorentInfo(indexPost, Rank) {
 
 
 Row ranke(Rank) {
-  if (Rank == 5) {
+  if (Rank >= 5) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
 
@@ -269,8 +276,18 @@ Row ranke(Rank) {
 
 List food = [
   "burger",
+  "burger",
   "finger fiery",
   "dolma",
   "dolma",
   "bagla",
 ];
+
+void PrudoctInfo(int num) {
+  int indexResN;
+  int indexPost;
+  int Rank;
+  bool dlevry;
+bool bromocod;
+
+}

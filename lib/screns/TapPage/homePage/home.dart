@@ -12,6 +12,7 @@ class homepage extends StatefulWidget {
 class _homepageState extends State<homepage> {
   @override
   Widget build(BuildContext context) {
+    SliverGridDelegate _gridDelegate;
     return Scaffold(
       appBar: AppBar(
         actions: [
@@ -57,98 +58,114 @@ class _homepageState extends State<homepage> {
               child: Row(
                 children: [
                   Expanded(
-                    child: ListView(
+                    child: ListView.builder(
+                      itemCount: typeImage.length,
                       scrollDirection: Axis.horizontal,
-                      children: [
-                        types(0),
-                        types(1),
-                        types(2),
-                        types(3),
-                        types(4),
-                        types(5),
-                        types(6),
-                        types(7),
-                        types(8),
-                        types(9),
-                        types(10),
-                        types(11),
-                        types(12),
-                        types(13),
-                        types(14),
-                        types(15),
-                        types(16),
-                        types(17),
-                      ],
+                      itemBuilder: (BuildContext context, int index) {
+                        return types(index);
+                      },
                     ),
                   ),
                 ],
               ),
             ),
             Expanded(
-              child: ListView(
+              child: CustomScrollView(
                 scrollDirection: Axis.vertical,
-                children: [
-                  Container(
-                    height: 250,
-                    child: Column(
-                      children: [
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
-                              event(),
-                              Container(
-                                height: 200,
-                                child: Row(
-                                  children: [
-                                    Expanded(
-                                      child: ListView(
-                                        scrollDirection: Axis.horizontal,
-                                        children: [
-                                          PopulerShops(),
-                                          PopulerShops(),
-                                          PopulerShops(),
-                                        ],
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Container(
-                    height: 35,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Expanded(
-                            child: ListView(
+                shrinkWrap: false,
+
+                slivers: [
+                  SliverList(
+                      delegate: SliverChildListDelegate([
+                    Container(
+                      height: 200,
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: ListView.builder(
+                              itemCount: 5,
+                              itemBuilder: (BuildContext contetext, int index) {
+                                return PopulerShops();
+                              },
                               scrollDirection: Axis.horizontal,
-                              children: [
-                                Topics(0),
-                                Topics(1),
-                                Topics(2),
-                                Topics(3),
-                                Topics(4),
-                                Topics(5),
-                                Topics(6),
-                              ],
-                            ))
-                      ],
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
+                  ])),
+
+                  SliverAppBar(
+                    automaticallyImplyLeading: false,
+                    backgroundColor: Colors.white,
+                    flexibleSpace: Container(
+                      height: 30,
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Expanded(
+                            child: ListView.builder(
+                              itemCount: TopicsName.length,
+                              scrollDirection: Axis.horizontal,
+                              itemBuilder: (BuildContext context, int index) {
+                                return Topics(index);
+                              },
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                    pinned: true, //stop bar
                   ),
-                  Column(
-                    children: [
-                      post(1, 1, 3, true, true),
-                      post(4, 3, 5, true, false),
-                      post(5, 4, 2, true, false),
-                    ],
+                  SliverList(
+                    delegate:
+                        SliverChildBuilderDelegate(childCount: ResN.length ,
+                            (BuildContext context, index) {
+                      print(index);
+                      return Container(
+                        height: 200,
+                        child: post(index, index, index, true, true),
+                      );
+                    }),
                   ),
+                  // PageView.builder(
+                  //     itemCount: 2,
+                  //     itemBuilder: (BuildContext context , int index){
+                  //   return
+                  //       post(1, 1, 1, true, true);
+                  // })
+                  // SliverList(
+                  //   delegate: SliverChildListDelegate([
+                  //     Container(
+                  //       height: 400,
+                  //       child:
+                  //     Column(
+                  //       children: [
+                  //         Expanded(child: ListView.builder(
+                  //             itemCount: 2,
+                  //             itemBuilder: (BuildContext context, int index) {
+                  //               return
+                  //             }))
+                  //
+                  //         // Container(
+                  //         //   height: 200,
+                  //         //   child: Expanded(
+                  //         //       child: PageView(scrollDirection: Axis.vertical,
+                  //         //     children: [                          post(5, 3, 2, true, false),
+                  //         //
+                  //         //       post(5, 3, 2, true, true),
+                  //         //     ],
+                  //         //   )),
+                  //         // )
+                  //       ],
+                  //     ),
+                  //     )
+                  //   ]),
+                  // )
                 ],
+                // children:
+                // [
               ),
             ),
           ],
@@ -157,7 +174,9 @@ class _homepageState extends State<homepage> {
     );
   }
 
-  Column types(int index,) {
+  Column types(
+    int index,
+  ) {
     return Column(
       children: [
         Container(
@@ -210,10 +229,7 @@ class _homepageState extends State<homepage> {
             Container(
               margin: EdgeInsets.all(9),
               height: 130,
-              width: MediaQuery
-                  .of(context)
-                  .size
-                  .width - 100,
+              width: MediaQuery.of(context).size.width - 100,
               decoration: BoxDecoration(
                   image: DecorationImage(
                       fit: BoxFit.cover, image: AssetImage(typeImage[0])),
@@ -260,100 +276,96 @@ class _homepageState extends State<homepage> {
     );
   }
 
-
 // ###################
-TextButton event() {
-  return TextButton(
-      onPressed: () {},
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.end,
-        children: [
-          Padding(
-            padding: EdgeInsets.only(right: 5),
-            child: Text(
-              "Popular Shpps",
-              style: TextStyle(color: mainColor(), fontSize: 18),
-            ),
-          ),
-          Container(
-            color: mainColor(),
-            width: 135,
-            height: 2,
-          )
-        ],
-      ));
-}
-Container post(int indexResN, int indexPost, int Rank, bool dlevry,
-    bool bromocod) {
-  return Container(
-      height: 190,
-      margin: EdgeInsets.all(20),
-      child: GestureDetector(
-        onTap: () {
-          print("go");
-
-          Navigator.push(
-              context, MaterialPageRoute(builder: (_)
-          =>
-              PruductPage(
-                  foodintConst:IntfoodCost[indexPost],
-                foodn: food[indexPost],
-                postImage:postImage[indexPost],
-                bromoCode: bromoCode(bromocod),
-                ResN: ResN[indexResN],
-                  CostOrder:CostOrder[indexPost],
-                  DlvC:DlvC[indexPost],
-                locR:locR[indexPost],
-                  ranke : ranke (Rank)
-
-
-              ),
-          ));
-        },
-        // onTap: (){Navigator.of(context).push(MaterialPageRoute(builder:(context) => PruductPage()));},
-
+  TextButton event() {
+    return TextButton(
+        onPressed: () {},
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            Expanded(
-              child: Container(
-                padding: EdgeInsets.all(15),
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    image: DecorationImage(
-                        fit: BoxFit.cover,
-                        image: AssetImage(postImage[indexPost]))),
-                child: Stack(
-                  alignment: Alignment.topRight,
+            Padding(
+              padding: EdgeInsets.only(right: 5),
+              child: Text(
+                "Popular Shpps",
+                style: TextStyle(color: mainColor(), fontSize: 18),
+              ),
+            ),
+            Container(
+              color: mainColor(),
+              width: 135,
+              height: 2,
+            )
+          ],
+        ));
+  }
+
+  Container post(
+      int indexResN, int indexPost, int Rank, bool dlevry, bool bromocod) {
+    return Container(
+        height: 200,
+        margin: EdgeInsets.all(20),
+        child: GestureDetector(
+          onTap: () {
+            print("go");
+
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => PruductPage(
+                      foodintConst: IntfoodCost[indexPost],
+                      foodn: food[indexPost],
+                      postImage: postImage[indexPost],
+                      bromoCode: bromoCode(bromocod),
+                      ResN: ResN[indexResN],
+                      CostOrder: CostOrder[indexPost],
+                      DlvC: DlvC[indexPost],
+                      locR: locR[indexPost],
+                      ranke: ranke(Rank)),
+                ));
+          },
+          // onTap: (){Navigator.of(context).push(MaterialPageRoute(builder:(context) => PruductPage()));},
+
+          child: Column(
+            children: [
+              Expanded(
+                child: Container(
+                  padding: EdgeInsets.all(15),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      image: DecorationImage(
+                          fit: BoxFit.cover,
+                          image: AssetImage(postImage[indexPost]))),
+                  child: Stack(
+                    alignment: Alignment.topRight,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [dlv(dlevry), bromoCode(bromocod)],
+                      )
+                    ],
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        dlv(dlevry), bromoCode(bromocod)],
-                    )
+                    Text(
+                      ResN[indexResN],
+                      style: TextStyle(fontSize: 20, color: mainColor()),
+                    ),
+                    Text(
+                      CostOrder[indexPost],
+                      style: TextStyle(fontSize: 11, color: mainElementColor()),
+                    ),
                   ],
                 ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(10),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    ResN[indexResN],
-                    style: TextStyle(fontSize: 20, color: mainColor()),
-                  ),
-                  Text(
-                    CostOrder[indexPost],
-                    style: TextStyle(fontSize: 11, color: mainElementColor()),
-                  ),
-                ],
-              ),
-            ),
-            RestorentInfo(indexPost, Rank),
-          ],
-        ),
-      ));
-}
+              RestorentInfo(indexPost, Rank),
+            ],
+          ),
+        ));
+  }
 }
