@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:toters/data/allData.dart';
 
 class profilePage extends StatefulWidget {
+
   @override
   State<profilePage> createState() => _profilePageState();
 }
